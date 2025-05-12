@@ -1,0 +1,59 @@
+<div class="request-status-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <img
+        src="assets/images/solicitudes_boton.png"
+        alt="Solicitudes"
+        class="header-icon-left"
+      />
+      <h1>Estado de Solicitudes</h1>
+    </div>
+    <div class="header-right">
+      <a [routerLink]="['/entrepreneur/home']">
+        <img
+          src="assets/images/home-icon.png"
+          alt="Home"
+          class="header-icon-right"
+        />
+      </a>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <table class="status-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre de las Empresas</th>
+        <th>Descripción del paquete</th>
+        <th>Estado</th>
+        <th>Precio</th>
+        <th>Pagar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requestData">
+        <td><input type="checkbox" /></td>
+        <td>{{ request.empresa }}</td>
+        <td>{{ request.descripcion }}</td>
+        <td>{{ request.estado }}</td>
+        <td>{{ request.precio }}</td>
+        <td *ngIf="request.estado === 'Aceptado'">
+          <div
+            class="pay-circle"
+            [routerLink]="['/entrepreneur/payment-gateway', request.id]"
+          ></div>
+        </td>
+        <td *ngIf="request.estado !== 'Aceptado'"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Cancel Button -->
+  <div class="button-container">
+    <button class="cancel-button" [routerLink]="['/entrepreneur/home']">
+      Cancelar
+    </button>
+  </div>
+</div>
